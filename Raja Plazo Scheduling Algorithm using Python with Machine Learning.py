@@ -54,7 +54,7 @@ predictions = model.predict(X_new_task)
 selected_machine = tf.argmax(predictions, axis=1)[0]
 
 # The task is assigned to the selected machine
-print(f"The task is scheduled on machine {selected_machine}")
+print(f"The task is scheduled on machine {selected_machine}") 
 
 # Version of Tenserflow
 # print(f"TensorFlow version: {tf.__version__}")
