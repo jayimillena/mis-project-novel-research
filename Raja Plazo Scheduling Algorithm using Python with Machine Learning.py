@@ -27,12 +27,16 @@ y_train = [[1, 0, 0],  # Binary representation of machine assignment
 
 # Define the machine learning model
 model = Sequential()
-model.add(Dense(16, input_dim=2, activation='relu'))
-model.add(Dense(8, activation='relu'))
-model.add(Dense(3, activation='softmax'))
 
-# Compile the model
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+# Machine learning model
+model.add(Dense(units=16, input_dim=2, activation="relu"))
+model.add(Dense(units=8, activation="relu"))
+model.add(Dense(units=3, activation="softmax"))
+
+# Compile Model
+model.compile(loss=tf.keras.losses.CategoricalCrossentropy(),
+              optimizer="adam",
+              metrics=["accuracy"])
 
 # Train the model
 model.fit(X_train, y_train, epochs=50, batch_size=32)
@@ -46,9 +50,11 @@ X_new_task = [[6, 9]]
 # Make predictions
 predictions = model.predict(X_new_task)
 
-# Find the machine with the highest predicted probability
-selected_machine = tf.argmax(predictions, axis=1).numpy()[0]
+# Use tf.argmax instead of deprecated 'tf.argmax.numpy()'
+selected_machine = tf.argmax(predictions, axis=1)[0]
 
 # The task is assigned to the selected machine
 print(f"The task is scheduled on machine {selected_machine}")
 
+# Version of Tenserflow
+# print(f"TensorFlow version: {tf.__version__}")
